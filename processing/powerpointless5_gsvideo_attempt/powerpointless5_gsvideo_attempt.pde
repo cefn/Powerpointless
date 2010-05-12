@@ -23,29 +23,32 @@ Slide stage = null;
 
 Slide content = null;
 
-String sourcedir = "/home/cefn/Documents/Processing/powerpointless5_gsvideo_attempt/";
-
 Slide authoredContent(){
-  MovieSlide semaphore = slideMovie(sourcedir + "heathcliffe.mov");
+  MovieSlide movie1 = slideMovie(dataPath("1.mp4"));
+  MovieSlide movie2 = slideMovie(dataPath("2.mp4"));
+  MovieSlide movie3 = slideMovie(dataPath("3.mp4"));
   return slideSeries(new Slide[]{
-        slideImage("slide03.jpg"),
-        slidePetal(slidesFromDir("/home/cefn/Documents/code/powerpointless/katya", "jpg")),
+        slideImage(dataPath("slide03.jpg")),
+        movie1,
+        movie2,
+        movie3,
+        slidePetal(new Slide[]{movie1,movie2,movie3}),
         slidePetal(new Slide[]{
-          semaphore,
-          slideImage("slide01.jpg"), slideImage("slide02.jpg"), slideImage("slide03.jpg"), slideImage("slide04.jpg"),
+          movie1,
+          slideImage(dataPath("slide03.jpg")), slideImage(dataPath("slide03.jpg")), slideImage(dataPath("slide03.jpg")), slideImage(dataPath("slide03.jpg")),
           slideWrap(slideGrid(new Slide[]{
-            slideImage("slide01.jpg"), semaphore, slideImage("slide02.jpg"), 
-            semaphore, slideImage("slide03.jpg"), semaphore, 
-            slideImage("slide04.jpg"), semaphore, slideImage("slide02.jpg")
+            slideImage(dataPath("slide03.jpg")), movie1, slideImage(dataPath("slide03.jpg")), 
+            movie2, slideImage(dataPath("slide03.jpg")), movie3, 
+            slideImage(dataPath("slide03.jpg")), movie1, slideImage(dataPath("slide03.jpg"))
           })),
         })
   });
 }
 
 void setup(){
-  size(resWidth(), resHeight(), P3D);
+  size(resWidth(), resHeight(), P3D); //GLConstants.GLGRAPHICS
   frameRate(30);
-  //fullscreen = new fullscreen.FullScreen(this);
+  fullscreen = new fullscreen.FullScreen(this);
   //fullscreen.enter();
   setupStage();
   setupContent();
@@ -198,7 +201,7 @@ void chooseRes(int newres){
 
 void setRes(int w, int h){
   g.resize(w,h);
-  fullscreen.setResolution(w, h);
+  //fullscreen.setResolution(w, h);
   setupStage();
 }
 
@@ -274,10 +277,9 @@ static class MovieSlide extends AbstractSlide {
   
   boolean handleFrame(PGraphics g, float frame){
     super.handleFrame(g, frame);
-    /** Should work according to http://users.design.ucla.edu/~acolubri/processing/gsvideo/home/advanced.html
-    tex.putPixelsIntoTexture(this.mov);
-    g.image(tex,0,0,g.width,g.height);
-    */
+    //Should work according to http://users.design.ucla.edu/~acolubri/processing/gsvideo/home/advanced.html
+    //tex.putPixelsIntoTexture(this.mov);
+    //g.image(tex,0,0,g.width,g.height);
     g.image(this.mov,0,0,g.width,g.height);
     return true;
   }
