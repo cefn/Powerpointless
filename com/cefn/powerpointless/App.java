@@ -10,6 +10,7 @@ import com.cefn.powerpointless.slides.PetalMultiSlide;
 import com.cefn.powerpointless.slides.SerialSlide;
 import com.cefn.powerpointless.slides.WrappedSlide;
 
+import codeanticode.glgraphics.GLConstants;
 import codeanticode.gsvideo.*;
 
 import processing.core.PApplet;
@@ -67,12 +68,13 @@ public class App extends PApplet{
 		frameRate(15);
 		fullscreen = new FullScreen(this);
 		fullscreen.setShortcutsEnabled(true);
+		fullscreen.setResolution(resWidth(), resHeight());
 		setupStage();
 		setupContent();
 	}
 
 	void setupStage(){
-		PGraphics stageimg = createGraphics(resWidth(), resHeight(), P3D);
+		PGraphics stageimg = createGraphics(resWidth(), resHeight(), P3D); //P3D
 		stageimg.beginDraw();
 		stageimg.background(0);
 		stageimg.fill(255);
@@ -141,6 +143,10 @@ public class App extends PApplet{
 
 	public void movieEvent(GSMovie movie) {
 		movie.read();
+	}
+
+	public void pipelineEvent(GSPipeline pipe) {
+		pipe.read();
 	}
 
 	public void keyPressed(){

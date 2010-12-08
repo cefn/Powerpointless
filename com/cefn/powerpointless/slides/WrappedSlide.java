@@ -3,6 +3,8 @@
  */
 package com.cefn.powerpointless.slides;
 
+import codeanticode.glgraphics.GLConstants;
+
 import com.cefn.powerpointless.App;
 import com.cefn.powerpointless.Slide;
 
@@ -18,7 +20,7 @@ public class WrappedSlide extends AbstractSlide{
   public boolean handleFrame(PGraphics g, float frame){
     PGraphics wg = wrapGraphics(g.parent);
     wg.beginDraw();
-    wg.background(0);
+    wg.background(0f,0f);
     wrapped.handleFrame(wg, frame);
     g.image(wg, 0, 0, g.width, g.height);
     wg.endDraw();
